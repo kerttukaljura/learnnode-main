@@ -50,12 +50,12 @@ app.get('/circle', (req, res) => {
 app.get('/circleanswer', (req, res) => {
     let r = req.query.r;
     let answer = {
-        S: Math.pow(Math.PI * r * r),
+        S: Math.pow(r, 2) * Math.PI,
         r: r,
-        V: Math.pow(4/3 * Math.PI * r ),
-        C: Math.pow( 2 * Math.PI * r * r),
+        V: Math.pow(r, 2) * Math.PI * 4/3,
+        C: 2 * Math.PI * r,
     };
-    res.render('circleanswer.njk', req.query);
+    res.render('circleanswer.njk', answer);
 });
 
 app.get('/pythagoras', (req, res) => {
@@ -63,13 +63,14 @@ app.get('/pythagoras', (req, res) => {
 });
 
 app.get('/pythagorasanswer', (req, res) => {
-    let a = req.query.a, b;
+    let a = req.query.a;
+    let b = req.query.b;
     let answer = {
         b: b,
         a: a,
-        C: Math.pow((a, 2)+(b, 2)),
+        C: Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2)),
     };
-    res.render('pythagorasanswer.njk', req.query);
+    res.render('pythagorasanswer.njk', answer);
 });
 
   app.listen(port, () => {
